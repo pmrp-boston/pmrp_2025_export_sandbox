@@ -9,6 +9,14 @@ layout: home
 {% endif %}
 {% endfor %}
 
+## Classes demo pages
+
+These pages demonstrate that you can use class attributes in HTML and Markdown pages.
+* [Class in HTML demo]({{ 'html-class-test' | relative_url }})
+* [Class in MD demo]({{ 'md-class-test' | relative_url }})
+
+------
+
 {% if num_upcoming_events >= 2 %}
 
 # Now Playing: 
