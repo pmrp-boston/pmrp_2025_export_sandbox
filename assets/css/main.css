@@ -507,6 +507,8 @@ aside.callout > :last-child {
   display: flex;
   margin-bottom: calc(1.5 * var(--space-vertical-rhythm));
   gap: 8px;
+  flex-wrap: wrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .jump-to-season a {
