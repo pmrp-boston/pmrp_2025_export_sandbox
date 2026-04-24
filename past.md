@@ -15,7 +15,7 @@ This section lists our past performances. See our [upcoming events]({{ 'upcoming
 {{ season.content }}
 
 {% if season.season_id %}
-{% assign season_events = site.events | where: "season_id", season.season_id %}
+{% assign season_events = site.events | where: "season_id", season.season_id | where_exp: "item", "item.path contains 'index'" %}
 
 {% assign has_past_event = false %}
 {% for event in season_events %}
