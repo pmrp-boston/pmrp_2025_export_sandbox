@@ -32,10 +32,12 @@ layout: page
 <h2>{% if has_upcoming_events %}Past Events{% else %}Events{% endif %}</h2>
 <ul>
   {% for season_event in season_events %}
-  {% if (site.time > season_event.closed_datetime or season_event.closed_datetime == nil) and season_event.page contains "index" %}
+  {% if site.time > season_event.closed_datetime or season_event.closed_datetime == nil %}
+  {% if season_event.path contains "index" %}
   <li>
       <a href="{{ season_event.url | relative_url }}">{{ season_event.title }}</a>
   </li>
+  {% endif %}
   {% endif %}
   {% endfor %}
 </ul>
