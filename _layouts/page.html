@@ -13,6 +13,8 @@ layout: default
   {% if page.collection == "events" or page.collection == "seasons" %}
   {% assign season = site.seasons | where: "season_id", page.season_id | first %}
 
+  {% if page.collection == "events" %}
+  
   {% assign base_events = site.events | where_exp: "item", "item.path contains 'index'" %}
   {% assign sorted_base_events = base_events | sort: "closed_datetime" %}
 
@@ -20,10 +22,26 @@ layout: default
   {% if page.event_id == event.event_id %}
   {% assign prevIdx = forloop.index0 | minus: 1 %}
   {% assign nextIdx = forloop.index0 | plus: 1 %}
-  {% assign prevEvent = sorted_base_events[prevIdx] %}
-  {% assign nextEvent = sorted_base_events[nextIdx] %}
+  {% assign prevPage = sorted_base_events[prevIdx] %}
+  {% assign nextPage = sorted_base_events[nextIdx] %}
   {% endif %}
   {% endfor %}
+  
+  {% endif %}
+
+  {% if page.collection == "seasons" %}
+  {% assign sorted_seasons = site.seasons | sort: "season_id" %}
+
+  {% for season in sorted_seasons %}
+  {% if page.season_id == season.season_id %}
+  {% assign prevIdx = forloop.index0 | minus: 1 %}
+  {% assign nextIdx = forloop.index0 | plus: 1 %}
+  {% assign prevPage = sorted_seasons[prevIdx] %}
+  {% assign nextPage = sorted_seasons[nextIdx] %}
+  {% endif %}
+  {% endfor %}
+
+  {% endif %}
 
   <nav>
     <ol class="unstyled-list">
@@ -35,11 +53,11 @@ layout: default
       {% if page.event_id %}
       <li><a href="{{ season.url | relative_url }}">{{ season.title }}</a></li>
       {% endif %}
-      {% if prevEvent and prevIdx >= 0 %}
-      <li><a href="{{ prevEvent.url | relative_url }}">&larr; {{ prevEvent.title }}</a></li>
+      {% if prevPage and prevIdx >= 0 %}
+      <li><a href="{{ prevPage.url | relative_url }}">&larr; {{ prevPage.title }}</a></li>
       {% endif %}
-      {% if nextEvent %}
-      <li><a href="{{ nextEvent.url | relative_url }}">{{ nextEvent.title }} &rarr;</a></li>
+      {% if nextPage %}
+      <li><a href="{{ nextPage.url | relative_url }}">{{ nextPage.title }} &rarr;</a></li>
       {% endif %}
     </ol>
   </nav>
