@@ -24,11 +24,13 @@ This section lists our past performances. See our [upcoming events]({{ 'upcoming
 {% endif %}
 {% endfor %}
 
+{% assign sorted_season_events = season_events | sort: "closed_datetime" %}
+
 {% if has_past_event %}
 
 ### Events
 
-{% for event in season_events %}
+{% for event in sorted_season_events %}
 {% if site.time > event.closed_datetime or event.closed_datetime == nil %}
 
 * [{{ event.title }}]({{ event.url | relative_url }})
