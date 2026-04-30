@@ -22,8 +22,14 @@ layout: default
   {% if page.event_id == event.event_id %}
   {% assign prevIdx = forloop.index0 | minus: 1 %}
   {% assign nextIdx = forloop.index0 | plus: 1 %}
+  
+  {% if sorted_base_events[prevIdx].closed_datetime %}
   {% assign prevPage = sorted_base_events[prevIdx] %}
+  {% endif %}
+  {% if sorted_base_events[nextIdx].closed_datetime %}
   {% assign nextPage = sorted_base_events[nextIdx] %}
+  {% endif %}
+
   {% endif %}
   {% endfor %}
   
@@ -36,8 +42,14 @@ layout: default
   {% if page.season_id == season.season_id %}
   {% assign prevIdx = forloop.index0 | minus: 1 %}
   {% assign nextIdx = forloop.index0 | plus: 1 %}
+
+  {% if sorted_seasons[prevIdx].season_id %}
   {% assign prevPage = sorted_seasons[prevIdx] %}
+  {% endif %}
+  {% if sorted_seasons[nextIdx].season_id %}
   {% assign nextPage = sorted_seasons[nextIdx] %}
+  {% endif %}
+  
   {% endif %}
   {% endfor %}
 
